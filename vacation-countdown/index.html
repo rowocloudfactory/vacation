@@ -486,7 +486,6 @@
     /* ---------- Dates: always British English, 24-hour, home time zone (CET) ---------- */
     const fmt = (opts, tz) => new Intl.DateTimeFormat("en-GB", Object.assign(tz ? { timeZone: tz } : {}, opts));
     const HOME = CONFIG.homeTimeZone;
-    const homeDate  = fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" }, HOME);
     const homeClock = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZoneName: "short" }, HOME);
     const homeHHMM  = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }, HOME);
     const homeWd    = fmt({ weekday: "short" }, HOME);
@@ -495,7 +494,7 @@
     const localWd   = fmt({ weekday: "short" });
 
     function describeMoment(ms) {
-      const main = `${homeDate.format(ms)}, ${homeClock.format(ms)}`;
+      const main = `${homeWd.format(ms)} ${homeShort.format(ms)}, ${homeClock.format(ms)}`; // e.g. "Tue 8 Dec, 10:00 CET"
       const sameDay = localWd.format(ms) === homeWd.format(ms);
       if (sameDay && localHHMM.format(ms) === homeHHMM.format(ms)) return main;
       return `${main} <span class="local">(${sameDay ? "" : localWd.format(ms) + " "}${localHHMM.format(ms)} your time)</span>`;
@@ -669,7 +668,7 @@
           next === "wheelsup" ? `Wheels up! Next stop: ${D.name}.` :
                                 `<strong>${CONFIG.name} is officially on vacation.</strong> Back in&hellip;`;
         $("when").innerHTML = next === "during"
-          ? "Back at the desk: " + describeMoment(back)
+          ? "Landing back home: " + describeMoment(back)
           : "Departure: " + describeMoment(depart);
       }
       if (next === "wheelsup") {
