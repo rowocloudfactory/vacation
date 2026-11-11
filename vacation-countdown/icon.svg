@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5e1a6e"/>
+      <stop offset=".55" stop-color="#e0506a"/>
+      <stop offset="1" stop-color="#ffb878"/>
+    </linearGradient>
+    <clipPath id="c"><rect width="64" height="64" rx="14"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="64" height="64" fill="url(#sky)"/>
+    <circle cx="32" cy="46" r="15" fill="#ffd86b"/>
+    <path d="M0 46 Q8 42 16 46 T32 46 T48 46 T64 46 V64 H0Z" fill="#1f6f8b"/>
+    <path d="M0 52 Q8 49 16 52 T32 52 T48 52 T64 52 V64 H0Z" fill="#0e3f52"/>
+    <g fill="#1b1030">
+      <path d="M17 50 C17.5 40 19 32 22.5 24 L24.5 24.6 C21.5 32 20.4 40 20.6 50 Z"/>
+      <path d="M23.5 24 C18 19 11 19 5 23 C11 20 18 20.5 23.5 24Z"/>
+      <path d="M23.5 24 C21 16 15 12 8 12.5 C15 14 20 18 23.5 24Z"/>
+      <path d="M23.5 24 C25.5 16 31 11.5 38 11.5 C31.5 14 27 18 23.5 24Z"/>
+      <path d="M23.5 24 C30 21.5 36 23 39 28 C35 24.5 29.5 23.5 23.5 24Z"/>
+      <path d="M23.5 24 C23 29 25.5 34 29 36.5 C26.5 33 24.5 29 23.5 24Z"/>
+    </g>
+  </g>
+</svg>
