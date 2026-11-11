@@ -10,7 +10,7 @@
   <!-- Open Graph / Teams / Slack previews -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ronald's Out-of-Office Countdown">
-  <meta property="og:description" content="Days, hours, minutes and seconds until Ronald is officially on vacation. Plan your questions accordingly.">
+  <meta property="og:description" content="Days, hours, minutes and seconds until Ronald swaps the ticket queue for Bonaire. Plan your questions accordingly.">
   <meta property="og:url" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/">
   <meta property="og:image" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -239,7 +239,8 @@
     }
     .info-card h2 { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
     .info-card p { font-size: 1.05rem; line-height: 1.45; }
-    .info-card a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+    .contact-sep { display: block; height: 12px; }
+    .info-card a { overflow-wrap: anywhere; color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
     .welcome .big { font-size: clamp(3rem, 12vw, 6rem); margin-bottom: 6px; }
 
@@ -366,9 +367,16 @@
     const CONFIG = {
       name: "Ronald",
       departure: "2026-12-08T10:00:00+01:00",
-      returnAt:  "2026-12-27T18:00:00+01:00",
-      destination: "Somewhere sunny, far away from the ticket queue 🌞",
-      contactHtml: 'The <strong>Partner Care team</strong>, who are fully briefed and slightly jealous.',
+      returnAt:  "2026-12-27T13:00:00+01:00",
+      destination: "Bonaire 🏝️ Caribbean sun, turquoise water and zero Jira tickets 🐠",
+      contactHtml:
+        '<strong>Partner Care</strong><br>' +
+        '<a href="mailto:partnercare@cloudfactorygroup.com">partnercare@cloudfactorygroup.com</a><br>' +
+        '<a href="tel:+31358081227">+31 35 808 1227</a>' +
+        '<span class="contact-sep"></span>' +
+        '<strong>Niek Bongers</strong><br>' +
+        '<a href="mailto:nibo@cloudfactorygroup.com">nibo@cloudfactorygroup.com</a><br>' +
+        '<a href="tel:+31640030865">+31 6 4003 0865</a>',
       messages: [
         "Jira tickets will have to wait 🎫",
         "Out-of-office reply: already written ✍️",
