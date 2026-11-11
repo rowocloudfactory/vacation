@@ -5,23 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ronald's Out-of-Office Countdown</title>
   <meta name="description" content="Live countdown until Ronald from the Cloud Factory EU Partner Care team swaps tickets for a beach towel.">
-  <meta name="theme-color" content="#ff7e5f">
+  <meta name="theme-color" content="#2b1055">
 
   <!-- Open Graph / Teams / Slack previews -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cloud Factory EU Partner Care">
+  <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Ronald's Out-of-Office Countdown">
   <meta property="og:description" content="Days, hours, minutes and seconds until Ronald swaps the ticket queue for Bonaire. Plan your questions accordingly.">
   <meta property="og:url" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/">
   <meta property="og:image" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Sunset with palm trees and a plane: Ronald's Out-of-Office Countdown">
+  <meta property="og:image:alt" content="Sunset with palm trees and a flight path from Amsterdam to Bonaire: Ronald's Out-of-Office Countdown">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ronald's Out-of-Office Countdown">
-  <meta name="twitter:description" content="Days, hours, minutes and seconds until Ronald is officially on vacation.">
+  <meta name="twitter:description" content="Days, hours, minutes and seconds until Ronald swaps the ticket queue for Bonaire.">
   <meta name="twitter:image" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/og-image.png">
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,335 +33,391 @@
 
   <style>
     :root {
-      --sky-top: #2b1055;
-      --sky-mid: #d53369;
-      --sky-low: #ff7e5f;
-      --sky-horizon: #feb47b;
+      --sky-1: #2b1055;
+      --sky-2: #5e1a6e;
+      --sky-3: #a42a6e;
+      --sky-4: #e0506a;
+      --sky-5: #ff8a5f;
+      --sky-6: #ffb878;
       --sun: #ffd86b;
-      --sea-1: #1f6f8b;
-      --sea-2: #165a72;
       --sea-3: #0e3f52;
       --palm: #1b1030;
-      --card-bg: rgba(255, 255, 255, 0.16);
-      --card-border: rgba(255, 255, 255, 0.35);
+      --glass: rgba(40, 10, 66, 0.42);
+      --glass-strong: rgba(30, 10, 58, 0.64);
+      --glass-border: rgba(255, 255, 255, 0.28);
       --text: #fffaf3;
-      --text-soft: rgba(255, 250, 243, 0.85);
+      --text-soft: rgba(255, 250, 243, 0.9);
       --accent: #ffe08a;
+      --waves: clamp(90px, 15vh, 170px);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html, body { height: 100%; }
 
     body {
       font-family: "Fredoka", system-ui, sans-serif;
       color: var(--text);
       background: var(--sea-3);
-      min-height: 100vh;
-      min-height: 100dvh;
       overflow-x: hidden;
-      position: relative;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ---------- Scenery ---------- */
-    .scene {
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
-      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 38%, var(--sky-low) 62%, var(--sky-horizon) 78%);
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
     }
+
+    /* ================= HERO ================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--sky-1) 0%, var(--sky-2) 26%, var(--sky-3) 50%, var(--sky-4) 68%, var(--sky-5) 82%, var(--sky-6) 94%);
+      padding: clamp(20px, 4.5vh, 56px) 16px calc(var(--waves) * 0.55);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+
+    .scene { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 
     .stars {
-      position: absolute; inset: 0 0 50% 0;
+      position: absolute; inset: 0 0 55% 0;
       background-image:
         radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
         radial-gradient(1px 1px at 28% 8%, #fff 50%, transparent 51%),
-        radial-gradient(1.5px 1.5px at 47% 22%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 47% 4%, #fff 50%, transparent 51%),
         radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
         radial-gradient(1.5px 1.5px at 81% 6%, #fff 50%, transparent 51%),
         radial-gradient(1px 1px at 92% 25%, #fff 50%, transparent 51%),
         radial-gradient(1px 1px at 5% 35%, #fff 50%, transparent 51%),
-        radial-gradient(1px 1px at 72% 30%, #fff 50%, transparent 51%);
+        radial-gradient(1px 1px at 88% 40%, #fff 50%, transparent 51%);
       opacity: .7;
       animation: twinkle 4s ease-in-out infinite alternate;
     }
     @keyframes twinkle { from { opacity: .35; } to { opacity: .8; } }
 
+    /* The sun sits on the horizon. It is also a button (confetti burst). */
     .sun {
       position: absolute;
-      left: 50%; bottom: 14vh;
-      width: min(52vw, 340px); aspect-ratio: 1;
+      left: 50%; bottom: calc(var(--waves) * 0.62);
+      width: clamp(150px, 34vw, 230px); aspect-ratio: 1;
       transform: translate(-50%, 50%);
-      border-radius: 50%;
-      background: radial-gradient(circle at 50% 50%, #fff3c4 0%, var(--sun) 45%, #ff9a5a 100%);
+      border-radius: 50%; border: 0;
+      background: radial-gradient(circle at 50% 45%, #fff6d0 0%, var(--sun) 42%, #ff9a5a 100%);
       box-shadow: 0 0 80px 30px rgba(255, 190, 110, .55);
       animation: sunGlow 6s ease-in-out infinite alternate;
+      cursor: pointer;
+      z-index: 0;
     }
+    .sun:focus-visible { outline: 3px solid #fff; outline-offset: 6px; }
+    .sun:hover { filter: brightness(1.06); }
     @keyframes sunGlow {
       from { box-shadow: 0 0 60px 20px rgba(255, 190, 110, .45); }
       to   { box-shadow: 0 0 110px 45px rgba(255, 190, 110, .65); }
     }
-
-    .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 22vh; min-height: 120px; }
-    .wave {
-      position: absolute; left: -50%; width: 200%; height: 100%;
-      background-repeat: repeat-x; background-size: 50% 100%;
+    @media (min-width: 1000px) {
+      .sun { left: 17%; width: clamp(200px, 17vw, 320px); }
     }
+
+    .waves { position: absolute; left: 0; right: 0; bottom: 0; height: var(--waves); }
+    .wave { position: absolute; left: -50%; width: 200%; height: 100%; background-repeat: repeat-x; background-size: 50% 100%; }
     .wave.w1 {
-      bottom: 0; opacity: .75;
+      bottom: 0; opacity: .8;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q100 10 200 40 T400 40 T600 40 T800 40 V120 H0Z' fill='%231f6f8b'/%3E%3C/svg%3E");
       animation: drift 14s linear infinite;
     }
     .wave.w2 {
-      bottom: -12px; opacity: .85;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 55 Q100 30 200 55 T400 55 T600 55 T800 55 V120 H0Z' fill='%23165a72'/%3E%3C/svg%3E");
+      bottom: 0; height: 80%; opacity: .92;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 45 Q100 22 200 45 T400 45 T600 45 T800 45 V120 H0Z' fill='%23165a72'/%3E%3C/svg%3E");
       animation: drift 10s linear infinite reverse;
     }
     .wave.w3 {
-      bottom: -26px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 70 Q100 50 200 70 T400 70 T600 70 T800 70 V120 H0Z' fill='%230e3f52'/%3E%3C/svg%3E");
+      bottom: 0; height: 55%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 50 Q100 30 200 50 T400 50 T600 50 T800 50 V120 H0Z' fill='%230e3f52'/%3E%3C/svg%3E");
       animation: drift 7s linear infinite;
     }
     @keyframes drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
 
-    .palm { position: absolute; bottom: 4vh; width: clamp(140px, 22vw, 300px); fill: var(--palm); }
-    .palm.left  { left: -30px; transform-origin: bottom center; animation: sway 5s ease-in-out infinite alternate; }
-    .palm.right { right: -40px; transform: scaleX(-1); width: clamp(110px, 17vw, 240px); }
+    .palm { position: absolute; bottom: calc(var(--waves) * 0.35); fill: var(--palm); }
+    .palm.left  { left: -36px; width: clamp(120px, 22vw, 320px); transform-origin: 40% 100%; animation: sway 5s ease-in-out infinite alternate; }
+    .palm.right { right: -44px; width: clamp(96px, 16vw, 250px); transform: scaleX(-1); }
     .palm.right .fronds { transform-origin: 60% 20%; animation: frond 4s ease-in-out infinite alternate; }
     @keyframes sway { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
     @keyframes frond { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
 
-    .plane {
-      position: absolute; top: 12vh; left: 0;
-      font-size: clamp(32px, 5vw, 56px);
-      animation: fly 16s linear infinite;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,.25));
-    }
-    .plane .banner {
-      position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
-      margin-right: 6px;
-      font-size: clamp(11px, 1.3vw, 15px); font-weight: 600; white-space: nowrap;
-      background: #fffaf3; color: #d53369;
-      padding: 4px 10px; border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
-    }
-    .plane .banner::after {
-      content: ""; position: absolute; left: 100%; top: 50%; width: 8px; border-top: 1.5px solid #fffaf3;
-    }
-    @keyframes fly {
-      0%   { transform: translate(-40vw, 6vh) rotate(-4deg); }
-      50%  { transform: translate(55vw, 0) rotate(2deg); }
-      100% { transform: translate(140vw, -4vh) rotate(-3deg); }
-    }
-
-    /* ---------- Content ---------- */
-    main {
+    .hero-content {
       position: relative; z-index: 1;
-      max-width: 900px; margin: 0 auto;
-      padding: clamp(80px, 14vh, 140px) 16px 34vh;
-      text-align: center;
+      width: 100%; max-width: 860px;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      pointer-events: none;
     }
+    .hero-content > * { pointer-events: auto; }
 
-    .eyebrow {
+    .badge {
       display: inline-block;
-      font-size: .85rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-      background: rgba(255,255,255,.14); border: 1px solid var(--card-border);
+      font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(30, 8, 52, .5); border: 1px solid var(--glass-border);
       padding: 6px 14px; border-radius: 999px;
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
 
     h1 {
       font-family: "Pacifico", cursive; font-weight: 400;
-      font-size: clamp(2.1rem, 7vw, 4.4rem);
-      line-height: 1.15;
-      margin: 18px 0 10px;
-      text-shadow: 0 4px 18px rgba(80, 10, 60, .45);
+      margin: clamp(10px, 2vh, 18px) 0 clamp(6px, 1.2vh, 12px);
+      text-shadow: 0 4px 18px rgba(60, 5, 50, .5);
+      text-wrap: balance;
     }
+    h1 .h1-small { display: block; font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.3; color: var(--accent); }
+    h1 .h1-main  { display: block; font-size: clamp(2.15rem, 6.2vw, 3.7rem); line-height: 1.3; }
+    .nowrap { white-space: nowrap; }
 
-    .subtitle { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: var(--text-soft); }
+    .subtitle { font-size: clamp(1.05rem, 2.4vw, 1.3rem); font-weight: 500; color: var(--text-soft); text-wrap: balance; }
     .subtitle strong { color: var(--accent); font-weight: 600; }
+    .subtitle.wheels { font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 700; color: var(--accent); }
 
     .countdown {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: clamp(8px, 2vw, 18px);
-      margin: 34px auto 14px; max-width: 720px;
+      gap: clamp(8px, 1.6vw, 16px);
+      width: 100%; max-width: 680px;
+      margin: clamp(14px, 2.6vh, 26px) auto clamp(10px, 1.6vh, 14px);
     }
     .unit {
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 20px; padding: clamp(14px, 3vw, 26px) 6px;
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0) 60%), var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: clamp(10px, 2.2vh, 20px) 4px clamp(10px, 1.8vh, 16px);
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(60, 10, 50, .25);
+      box-shadow: 0 10px 30px rgba(50, 5, 45, .28);
     }
     .num {
       display: block;
-      font-size: clamp(2.3rem, 9vw, 4.8rem); font-weight: 700; line-height: 1;
+      font-size: clamp(2.2rem, 7.5vw, 4.4rem); font-weight: 700; line-height: 1;
       font-variant-numeric: tabular-nums;
-      text-shadow: 0 3px 10px rgba(0,0,0,.2);
     }
     .num.tick { animation: pop .35s ease-out; }
-    @keyframes pop { 0% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    @keyframes pop { 0% { transform: scale(1.1); } 100% { transform: scale(1); } }
     .label {
-      display: block; margin-top: 8px;
-      font-size: clamp(.7rem, 2vw, .95rem); font-weight: 500;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--text-soft);
+      display: block; margin-top: 6px;
+      font-size: clamp(.78rem, 1.8vw, .95rem); font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: #fff;
     }
+    .label .short { display: none; }
 
-    .target { font-size: .95rem; color: var(--text-soft); }
-
-    .progress-wrap { max-width: 720px; margin: 26px auto 0; text-align: left; }
-    .progress-head { display: flex; justify-content: space-between; font-size: .9rem; color: var(--text-soft); margin-bottom: 8px; gap: 12px; }
-    .progress {
-      height: 22px; border-radius: 999px; overflow: hidden;
-      background: rgba(255,255,255,.18); border: 1px solid var(--card-border);
+    .pill {
+      display: inline-block;
+      background: rgba(30, 8, 52, .5); border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px; padding: 6px 16px;
+      font-size: .95rem; font-weight: 500; text-wrap: balance;
     }
-    .bar {
-      height: 100%; width: 0%;
-      background: linear-gradient(90deg, #ffe08a, #ff9a5a, #ff5e8a);
-      border-radius: 999px;
-      transition: width .8s ease;
+    .pill .local { color: var(--accent); white-space: nowrap; }
+
+    /* ---------- Flight path card ---------- */
+    .flight {
+      width: 100%; max-width: 680px;
+      margin-top: clamp(12px, 2.2vh, 22px);
+      background: var(--glass-strong);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
+      padding: 8px clamp(10px, 2vw, 18px);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 34px rgba(40, 5, 40, .3);
+    }
+    #flight-svg { display: block; width: 100%; overflow: visible; }
+    #flight-svg text { fill: #fff; font-family: "Fredoka", system-ui, sans-serif; }
+    #flight-svg .code { font-size: 17px; font-weight: 700; }
+    #flight-svg .city { font-size: 11.5px; font-weight: 500; fill: rgba(255,255,255,.88); }
+    #flight-svg .big  { font-weight: 700; }
+    #flight-svg .small { font-weight: 500; fill: rgba(255,255,255,.9); }
+    .route-base { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 0.1 8; }
+    .route-done { fill: none; stroke: url(#route-grad); stroke-width: 4; stroke-linecap: round; }
+    .pin { fill: #fff; }
+    .pin-ring { fill: none; stroke: rgba(255,255,255,.55); stroke-width: 2; }
+    .plane-bob { animation: bob 2.4s ease-in-out infinite alternate; }
+    @keyframes bob { from { transform: translateY(-1.5px); } to { transform: translateY(1.5px); } }
+    .plane-hop { animation: hop 1.2s ease-in-out 3; }
+    @keyframes hop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.45); } }
+    .plane-shape { fill: #fff; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+
+    /* ================= SEA ================= */
+    .sea {
       position: relative;
+      background: linear-gradient(180deg, var(--sea-3) 0%, #0b3445 100%);
+      padding: 18px 16px 28px;
     }
-    .bar::after {
-      content: "🏖️"; position: absolute; right: -4px; top: 50%; transform: translateY(-50%); font-size: 18px;
-    }
-    .progress-pct { text-align: center; margin-top: 10px; font-weight: 600; font-size: 1.1rem; }
+    .sea-inner { max-width: 860px; margin: 0 auto; }
 
-    .ticker {
-      margin: 30px auto 0; max-width: 560px; min-height: 3.2em;
-      font-size: clamp(1rem, 2.6vw, 1.2rem); font-weight: 500;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
+    .ticker { display: flex; justify-content: center; min-height: 2.6em; margin-bottom: 18px; }
+    .ticker span {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px; padding: 8px 18px;
+      font-size: clamp(1rem, 2.4vw, 1.1rem); font-weight: 500; text-align: center;
+      transition: opacity .4s ease, transform .4s ease;
     }
-    .ticker span { transition: opacity .5s ease, transform .5s ease; }
-    .ticker span.out { opacity: 0; transform: translateY(8px); }
+    .ticker span.out { opacity: 0; transform: translateY(6px); }
 
-    .info {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px; max-width: 720px; margin: 34px auto 0; text-align: left;
+    .info { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; align-items: start; }
+    .info.single { grid-template-columns: minmax(0, 520px); justify-content: center; }
+    .info-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16); border-radius: 18px; padding: 18px 20px; }
+    .info-card h2 {
+      display: flex; align-items: center; gap: 8px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 10px;
     }
-    .info-card {
-      background: rgba(30, 10, 50, .28); border: 1px solid var(--card-border);
-      border-radius: 18px; padding: 18px 20px;
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    .info-card h2 svg { width: 22px; height: 22px; flex: none; }
+    .dest-name { font-family: "Pacifico", cursive; font-size: 1.9rem; line-height: 1.25; }
+    .dest-desc { font-size: 1.02rem; line-height: 1.45; color: var(--text-soft); margin-top: 2px; }
+    .bonaire-now {
+      display: flex; gap: 8px; align-items: flex-start;
+      margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.14);
+      font-size: .98rem; line-height: 1.4;
     }
-    .info-card h2 { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .info-card p { font-size: 1.05rem; line-height: 1.45; }
-    .contact-sep { display: block; height: 12px; }
-    .info-card a { overflow-wrap: anywhere; color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+    .bonaire-now svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+    .bonaire-now strong { color: var(--accent); font-weight: 600; }
 
-    .welcome .big { font-size: clamp(3rem, 12vw, 6rem); margin-bottom: 6px; }
-
-    footer {
-      position: relative; z-index: 1;
-      text-align: center; font-size: .8rem; color: rgba(255,255,255,.75);
-      padding: 0 16px 24px; margin-top: -26vh;
+    .contact { display: grid; gap: 14px; }
+    .contact-name { font-weight: 600; font-size: 1.05rem; margin-bottom: 2px; }
+    .contact a {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text); text-decoration: underline; text-decoration-color: rgba(255,224,138,.7);
+      text-underline-offset: 3px; overflow-wrap: anywhere; line-height: 1.6;
     }
+    .contact a:hover { text-decoration-color: var(--accent); }
+    .contact a svg { width: 16px; height: 16px; flex: none; opacity: .85; }
+
+    footer { text-align: center; font-size: .85rem; color: rgba(255,255,255,.78); margin-top: 26px; }
 
     [hidden] { display: none !important; }
-
     #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
 
-    @media (max-width: 480px) {
+    /* ---------- Small screens ---------- */
+    @media (max-width: 600px) {
       .unit { border-radius: 14px; }
-      .label { letter-spacing: .06em; }
-      .plane { top: 7vh; }
+      .label { letter-spacing: .06em; font-size: .78rem; }
+      .pill { font-size: .9rem; }
+      .flight { border-radius: 18px; }
+    }
+    @media (max-width: 360px) {
+      .badge .eu { display: none; }
+      .badge { letter-spacing: .1em; }
+      .label .long { display: none; }
+      .label .short { display: inline; }
+    }
+    /* Short laptop screens: tighten so the hero fits */
+    @media (min-width: 900px) and (max-height: 820px) {
+      h1 .h1-main { font-size: clamp(2.15rem, 5.2vw, 3.3rem); }
+      .num { font-size: 3.6rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .plane { transform: translate(60vw, 0); }
     }
   </style>
 </head>
 <body>
-  <div class="scene" aria-hidden="true">
-    <div class="stars"></div>
-    <div class="sun"></div>
-    <div class="plane"><span class="banner">Bye, Jira!</span>✈️</div>
-
-    <svg class="palm left" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
-      <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
-      <g class="fronds">
-        <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
-        <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
-        <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
-        <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
-        <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
-        <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
-        <circle cx="118" cy="124" r="6"/><circle cx="128" cy="126" r="6"/>
-      </g>
-    </svg>
-    <svg class="palm right" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
-      <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
-      <g class="fronds">
-        <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
-        <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
-        <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
-        <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
-        <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
-        <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
-      </g>
-    </svg>
-
-    <div class="waves">
-      <div class="wave w1"></div>
-      <div class="wave w2"></div>
-      <div class="wave w3"></div>
-    </div>
-  </div>
+  <!-- Shared SVG icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-island" viewBox="0 0 24 24">
+      <path d="M2 20.5c2.2-1.6 4.4-1.6 6.6 0s4.4 1.6 6.6 0 4.4-1.6 6.8 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M5 18c2-2.2 5-3 8.5-2.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M11.4 16.4c.3-3.4 1-6.2 2.2-8.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M13.6 8c-1.6-2.2-4.4-2.8-6.8-1.6 2.4-.2 4.6.6 6.8 1.6zM13.6 8c.4-2.6 2.8-4.2 5.6-3.8-2.4.6-4 1.8-5.6 3.8zM13.6 8c2.6-.8 5.2.2 6.4 2.6-2-1.2-4-1.8-6.4-2.6zM13.6 8c-2.2.2-4 1.8-4.4 4 1.2-1.8 2.6-3.2 4.4-4z" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M12 7v5l3.2 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect x="3" y="5.5" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M3.5 7l8.5 6 8.5-6" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M6.6 3.5l3 .4 1.2 4-2 1.5a12 12 0 0 0 5.8 5.8l1.5-2 4 1.2.4 3c0 1-1 2-2 2C10.8 19.4 4.6 13.2 4.6 5.5c0-1 1-2 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
 
   <canvas id="confetti" aria-hidden="true"></canvas>
 
-  <main>
-    <span class="eyebrow">Cloud Factory · EU Partner Care</span>
-    <h1>Ronald's Out-of-Office Countdown</h1>
-
-    <!-- State 1: before departure -->
-    <section id="state-before" hidden>
-      <p class="subtitle">Wheels up in&hellip; plan your questions accordingly.</p>
-    </section>
-
-    <!-- State 2: on vacation -->
-    <section id="state-during" hidden>
-      <p class="subtitle"><strong>Ronald is officially on vacation.</strong> Back in&hellip;</p>
-    </section>
-
-    <!-- State 3: back -->
-    <section id="state-after" class="welcome" hidden>
-      <div class="big" aria-hidden="true">👋😎</div>
-      <p class="subtitle"><strong>Welcome back, Ronald!</strong><br>The tan fades. The ticket queue does not.</p>
-    </section>
-
-    <div id="countdown-block">
-      <div class="countdown" role="timer" aria-live="off">
-        <div class="unit"><span class="num" id="d">00</span><span class="label">Days</span></div>
-        <div class="unit"><span class="num" id="h">00</span><span class="label">Hours</span></div>
-        <div class="unit"><span class="num" id="m">00</span><span class="label">Minutes</span></div>
-        <div class="unit"><span class="num" id="s">00</span><span class="label">Seconds</span></div>
+  <header class="hero">
+    <div class="scene" aria-hidden="true"><div class="stars"></div></div>
+    <button class="sun" id="sun" type="button" aria-label="Click the sun for a confetti burst" title="Click me"></button>
+    <div class="scene" aria-hidden="true">
+      <svg class="palm left" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+        <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
+        <g class="fronds">
+          <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
+          <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
+          <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
+          <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
+          <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
+          <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
+          <circle cx="118" cy="124" r="6"/><circle cx="128" cy="126" r="6"/>
+        </g>
+      </svg>
+      <svg class="palm right" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+        <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
+        <g class="fronds">
+          <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
+          <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
+          <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
+          <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
+          <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
+          <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
+        </g>
+      </svg>
+      <div class="waves">
+        <div class="wave w1"></div>
+        <div class="wave w2"></div>
+        <div class="wave w3"></div>
       </div>
-      <p class="target" id="target-text"></p>
     </div>
 
-    <div class="progress-wrap" id="progress-block" hidden>
-      <div class="progress-head"><span>✈️ Departed</span><span>Back at the desk 💻</span></div>
-      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Vacation progress">
-        <div class="bar" id="bar"></div>
+    <div class="hero-content">
+      <span class="badge">Cloud Factory · <span class="eu">EU </span>Partner Care</span>
+
+      <h1 id="title">
+        <span class="h1-small" id="title-small">Ronald's</span>
+        <span class="h1-main" id="title-main"><span class="nowrap">Out-of-Office</span> Countdown</span>
+      </h1>
+
+      <p class="subtitle" id="subtitle"></p>
+      <p class="sr-only" id="sr-summary"></p>
+
+      <div class="countdown" id="countdown" aria-hidden="true">
+        <div class="unit"><span class="num" id="d">00</span><span class="label"><span class="long">Days</span><span class="short">Days</span></span></div>
+        <div class="unit"><span class="num" id="h">00</span><span class="label"><span class="long">Hours</span><span class="short">Hrs</span></span></div>
+        <div class="unit"><span class="num" id="m">00</span><span class="label"><span class="long">Minutes</span><span class="short">Mins</span></span></div>
+        <div class="unit"><span class="num" id="s">00</span><span class="label"><span class="long">Seconds</span><span class="short">Secs</span></span></div>
       </div>
-      <p class="progress-pct" id="pct"></p>
+
+      <p class="pill" id="when"></p>
+
+      <section class="flight" aria-labelledby="flight-title">
+        <h2 class="sr-only" id="flight-title">Trip progress</h2>
+        <svg id="flight-svg" role="img"></svg>
+      </section>
     </div>
+  </header>
 
-    <p class="ticker" aria-live="polite"><span id="ticker"></span></p>
+  <main class="sea">
+    <div class="sea-inner">
+      <p class="ticker"><span id="ticker"></span></p>
 
-    <div class="info">
-      <div class="info-card">
-        <h2>Destination</h2>
-        <p id="destination"></p>
+      <div class="info" id="info">
+        <section class="info-card">
+          <h2><svg aria-hidden="true"><use href="#i-island"/></svg><span id="dest-label">Destination</span></h2>
+          <p class="dest-name" id="dest-name"></p>
+          <p class="dest-desc" id="dest-desc"></p>
+          <p class="bonaire-now"><svg aria-hidden="true"><use href="#i-clock"/></svg><span id="bonaire-now"></span></p>
+        </section>
+        <section class="info-card" id="contact-card">
+          <h2><svg aria-hidden="true"><use href="#i-chat"/></svg>While I'm away, contact</h2>
+          <div class="contact" id="contact"></div>
+        </section>
       </div>
-      <div class="info-card" id="contact-card">
-        <h2>While I'm away, contact</h2>
-        <p id="contact"></p>
-      </div>
+
+      <footer>Made with sunscreen and vanilla JavaScript. Click the sun for a surprise.</footer>
     </div>
   </main>
-
-  <footer>Made with sunscreen and vanilla JavaScript. All times are shown in your local time zone.</footer>
 
   <script>
     /* =========================================================
@@ -368,15 +428,18 @@
       name: "Ronald",
       departure: "2026-12-08T10:00:00+01:00",
       returnAt:  "2026-12-27T13:00:00+01:00",
-      destination: "Bonaire 🏝️ Caribbean sun, turquoise water and zero Jira tickets 🐠",
-      contactHtml:
-        '<strong>Partner Care</strong><br>' +
-        '<a href="mailto:partnercare@cloudfactorygroup.com">partnercare@cloudfactorygroup.com</a><br>' +
-        '<a href="tel:+31358081227">+31 35 808 1227</a>' +
-        '<span class="contact-sep"></span>' +
-        '<strong>Niek Bongers</strong><br>' +
-        '<a href="mailto:nibo@cloudfactorygroup.com">nibo@cloudfactorygroup.com</a><br>' +
-        '<a href="tel:+31640030865">+31 6 4003 0865</a>',
+      homeTimeZone: "Europe/Amsterdam",
+      destination: {
+        name: "Bonaire",
+        description: "Caribbean sun, turquoise water and zero Jira tickets.",
+        timeZone: "America/Kralendijk",
+        homeCode: "AMS", homeCity: "Amsterdam",
+        awayCode: "BON", awayCity: "Bonaire"
+      },
+      contacts: [
+        { name: "Partner Care", email: "partnercare@cloudfactorygroup.com", phone: "+31358081227", phoneLabel: "+31 35 808 1227" },
+        { name: "Niek Bongers", email: "nibo@cloudfactorygroup.com", phone: "+31640030865", phoneLabel: "+31 6 4003 0865" }
+      ],
       messages: [
         "Jira tickets will have to wait 🎫",
         "Out-of-office reply: already written ✍️",
@@ -387,134 +450,285 @@
         "Partner Center can survive without him. Probably. 🤞",
         "Currently practising the art of not checking email 🧘",
         "Please hold all NCE questions until further notice ⏸️",
-        "Swapping license counts for coconut counts 🥥"
+        "Swapping license counts for coconut counts 🥥",
+        "Bye, Jira! 👋"
       ],
       welcomeMessages: [
         "Please be gentle, re-entry is a delicate process 🛬",
         "Inbox status: legendary 📬",
         "Still mentally on the beach 🏝️",
         "Coffee first, tickets second ☕"
+      ],
+      sunMessages: [
+        "Vitamin D delivered ☀️",
+        "Careful, that sun is hot 🔥",
+        "Sun clicked. Tan level +1 😎"
       ]
     };
 
-    /* ---------- Rotating messages ---------- */
-    let messages = CONFIG.messages;
-    let msgIndex = Math.floor(Math.random() * messages.length);
-    const ticker = document.getElementById("ticker");
-    ticker.textContent = messages[msgIndex];
-    setInterval(() => {
-      ticker.classList.add("out");
-      setTimeout(() => {
-        msgIndex = (msgIndex + 1) % messages.length;
-        ticker.textContent = messages[msgIndex];
-        ticker.classList.remove("out");
-      }, 500);
-    }, 4500);
-
-    /* ---------- Setup ---------- */
+    const WHEELS_UP_MS = 6000; // how long the "Wheels up!" moment is held at zero
     const depart = new Date(CONFIG.departure).getTime();
     const back   = new Date(CONFIG.returnAt).getTime();
-
-    // Testing helper: add ?now=2026-12-15T12:00:00+01:00 to the URL to preview a state.
-    const params = new URLSearchParams(location.search);
-    const fakeStart = params.get("now") ? new Date(params.get("now")).getTime() : null;
-    const realStart = Date.now();
-    const now = () => (fakeStart && !isNaN(fakeStart)) ? fakeStart + (Date.now() - realStart) : Date.now();
-
     const $ = id => document.getElementById(id);
-    $("destination").textContent = CONFIG.destination;
-    $("contact").innerHTML = CONFIG.contactHtml;
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const D = CONFIG.destination;
 
-    const fmt = new Intl.DateTimeFormat(undefined, {
-      weekday: "long", day: "numeric", month: "long", year: "numeric",
-      hour: "2-digit", minute: "2-digit", timeZoneName: "short"
-    });
+    /* ---------- Static content ---------- */
+    $("dest-name").textContent = D.name;
+    $("dest-desc").textContent = D.description;
+    $("contact").innerHTML = CONFIG.contacts.map(c => `
+      <div>
+        <p class="contact-name">${c.name}</p>
+        <a href="mailto:${c.email}"><svg aria-hidden="true"><use href="#i-mail"/></svg>${c.email}</a>
+        <a href="tel:${c.phone}"><svg aria-hidden="true"><use href="#i-phone"/></svg>${c.phoneLabel}</a>
+      </div>`).join("");
 
+    /* ---------- Dates: always British English, 24-hour, home time zone (CET) ---------- */
+    const fmt = (opts, tz) => new Intl.DateTimeFormat("en-GB", Object.assign(tz ? { timeZone: tz } : {}, opts));
+    const HOME = CONFIG.homeTimeZone;
+    const homeDate  = fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" }, HOME);
+    const homeClock = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZoneName: "short" }, HOME);
+    const homeHHMM  = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }, HOME);
+    const homeWd    = fmt({ weekday: "short" }, HOME);
+    const homeShort = fmt({ day: "numeric", month: "short" }, HOME);
+    const localHHMM = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+    const localWd   = fmt({ weekday: "short" });
+
+    function describeMoment(ms) {
+      const main = `${homeDate.format(ms)}, ${homeClock.format(ms)}`;
+      const sameDay = localWd.format(ms) === homeWd.format(ms);
+      if (sameDay && localHHMM.format(ms) === homeHHMM.format(ms)) return main;
+      return `${main} <span class="local">(${sameDay ? "" : localWd.format(ms) + " "}${localHHMM.format(ms)} your time)</span>`;
+    }
+
+    /* ---------- Bonaire live clock ---------- */
+    const awayClock = fmt({ hour: "2-digit", minute: "2-digit", hourCycle: "h23" }, D.timeZone);
+    function activity(hour) {
+      if (hour < 6)  return "Ronald is probably fast asleep";
+      if (hour < 8)  return "Ronald is probably watching the sunrise";
+      if (hour < 12) return "Ronald is probably snorkelling";
+      if (hour < 14) return "Ronald is probably having lunch in the shade";
+      if (hour < 17) return "Ronald is probably diving with the fish";
+      if (hour < 19) return "Ronald is probably watching the sunset";
+      if (hour < 22) return "Ronald is probably at dinner by the sea";
+      return "Ronald is probably stargazing";
+    }
+    function updateBonaire(t, st) {
+      const hhmm = awayClock.format(t);
+      const line = st === "before" ? "Ronald is not there yet, the beach is warming up"
+                 : st === "after"  ? "The fish already miss him"
+                 : activity(parseInt(hhmm, 10));
+      $("bonaire-now").innerHTML = `<strong>${hhmm} in ${D.name} right now.</strong> ${line}.`;
+    }
+
+    /* ---------- Countdown digits ---------- */
     const pad = n => String(n).padStart(2, "0");
-    const last = { d: null, h: null, m: null, s: null };
-
+    const last = {};
     function setNum(id, value) {
       if (last[id] === value) return;
       last[id] = value;
       const el = $(id);
       el.textContent = value;
-      el.classList.remove("tick");
-      void el.offsetWidth;
-      el.classList.add("tick");
+      el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick");
     }
-
-    function renderCountdown(ms) {
+    function split(ms) {
       const total = Math.max(0, Math.floor(ms / 1000));
-      setNum("d", pad(Math.floor(total / 86400)));
-      setNum("h", pad(Math.floor(total % 86400 / 3600)));
-      setNum("m", pad(Math.floor(total % 3600 / 60)));
-      setNum("s", pad(total % 60));
+      return { d: Math.floor(total / 86400), h: Math.floor(total % 86400 / 3600), m: Math.floor(total % 3600 / 60), s: total % 60 };
+    }
+    function renderCountdown(ms) {
+      const p = split(ms);
+      setNum("d", pad(p.d)); setNum("h", pad(p.h)); setNum("m", pad(p.m)); setNum("s", pad(p.s));
+    }
+    const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
+    const spoken = ms => { const p = split(ms); return `${plural(p.d, "day")}, ${plural(p.h, "hour")} and ${plural(p.m, "minute")}`; };
+    let lastSummary = "";
+    function updateSummary(text) { if (text !== lastSummary) { lastSummary = text; $("sr-summary").textContent = text; } }
+
+    /* ---------- Flight path: one plane, Amsterdam to Bonaire and back ---------- */
+    const svg = $("flight-svg");
+    let route = null, routeLen = 0, planeG, planeInner, doneEl, bigEl, smallEl;
+    let shownP = 0, glide = null;
+    let flight = { p: 0, big: "", small: "", label: "Trip progress" };
+
+    function buildFlight() {
+      const W = Math.max(240, Math.round(svg.getBoundingClientRect().width));
+      const narrow = W < 480;           // narrow: labels go to the top corners so the loop can use the full width
+      const H = narrow ? 172 : 180;
+      const mid = narrow ? H / 2 + 8 : H / 2 + 2;
+      const padX = narrow ? 24 : 96;
+      const ax = padX, bx = W - padX;
+      const lift = narrow ? 112 : 140;
+      const d = `M${ax},${mid} Q${W / 2},${mid - lift} ${bx},${mid} Q${W / 2},${mid + lift} ${ax},${mid}`;
+      const big = narrow ? 30 : 38, small = narrow ? 11.5 : 13;
+      const labels = narrow ? `
+        <text class="code" x="2" y="16">${D.homeCode}</text>
+        <text class="city" x="2" y="31">${D.homeCity}</text>
+        <text class="code" x="${W - 2}" y="16" text-anchor="end">${D.awayCode}</text>
+        <text class="city" x="${W - 2}" y="31" text-anchor="end">${D.awayCity}</text>` : `
+        <text class="code" x="${ax - 26}" y="${mid + 2}" text-anchor="end">${D.homeCode}</text>
+        <text class="city" x="${ax - 26}" y="${mid + 17}" text-anchor="end">${D.homeCity}</text>
+        <text class="code" x="${bx + 22}" y="${mid + 2}">${D.awayCode}</text>
+        <text class="city" x="${bx + 22}" y="${mid + 17}">${D.awayCity}</text>`;
+      svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+      svg.setAttribute("height", H);
+      svg.innerHTML = `
+        <title id="flight-desc"></title>
+        <defs><linearGradient id="route-grad" gradientUnits="userSpaceOnUse" x1="${ax}" y1="0" x2="${bx}" y2="0">
+          <stop offset="0" stop-color="#ffe08a"/><stop offset=".55" stop-color="#ff9a5a"/><stop offset="1" stop-color="#ff6b95"/></linearGradient></defs>
+        <path class="route-base" d="${d}"/>
+        <path class="route-done" id="route-done" d="${d}"/>
+        <circle class="pin-ring" cx="${ax}" cy="${mid}" r="9"/><circle class="pin" cx="${ax}" cy="${mid}" r="4.5"/>
+        <circle class="pin-ring" cx="${bx}" cy="${mid}" r="9"/><circle class="pin" cx="${bx}" cy="${mid}" r="4.5"/>${labels}
+        <text class="big" id="fl-big" x="${W / 2}" y="${mid + big * 0.18}" text-anchor="middle" style="font-size:${big}px"></text>
+        <text class="small" id="fl-small" x="${W / 2}" y="${mid + big * 0.18 + small + 9}" text-anchor="middle" style="font-size:${small}px"></text>
+        <g id="plane"><g id="plane-inner" class="${reduceMotion.matches ? "" : "plane-bob"}">
+          <path class="plane-shape" transform="scale(${narrow ? 1.15 : 1.35})" d="M12 0C12-1.2 10-1.6 8.5-1.6H3L-2-9.5h-2.6L-1.6-1.6H-7L-9.2-4.6H-11L-9.6 0-11 4.6h1.8L-7 1.6h5.4L-4.6 9.5H-2L3 1.6h5.5C10 1.6 12 1.2 12 0Z"/>
+        </g></g>`;
+      svg.setAttribute("aria-labelledby", "flight-desc");
+      route = svg.querySelector(".route-base");
+      routeLen = route.getTotalLength();
+      doneEl = $("route-done"); planeG = $("plane"); planeInner = $("plane-inner");
+      bigEl = $("fl-big"); smallEl = $("fl-small");
+      writeFlightText();
+      placePlane(shownP);
     }
 
-    let state = null;
-    function setState(next) {
-      if (state === next) return;
-      const prev = state;
-      state = next;
-      $("state-before").hidden = next !== "before";
-      $("state-during").hidden = next !== "during";
-      $("state-after").hidden  = next !== "after";
-      $("countdown-block").hidden = next === "after";
-      $("progress-block").hidden  = next !== "during";
-      $("contact-card").hidden    = next === "after";
-      if (next === "after") { messages = CONFIG.welcomeMessages; msgIndex = 0; ticker.textContent = messages[0]; }
-      document.querySelector(".banner").textContent =
-        next === "before" ? "Bye, Jira!" : next === "during" ? "Out of office" : "Welcome back!";
-      $("target-text").textContent =
-        next === "before" ? "Departure: " + fmt.format(depart) :
-        next === "during" ? "Return: " + fmt.format(back) : "";
-      // Celebrate when a countdown hits zero while the page is open.
-      if (prev !== null) confetti();
+    function writeFlightText() {
+      if (!bigEl) return;
+      bigEl.textContent = flight.big; smallEl.textContent = flight.small;
+      $("flight-desc").textContent = flight.label;
     }
 
-    function tick() {
-      const t = now();
-      if (t < depart) {
-        setState("before");
-        renderCountdown(depart - t);
-      } else if (t < back) {
-        setState("during");
-        renderCountdown(back - t);
-        const pct = Math.min(100, (t - depart) / (back - depart) * 100);
-        $("bar").style.width = pct + "%";
-        document.querySelector(".progress").setAttribute("aria-valuenow", pct.toFixed(0));
-        $("pct").textContent = pct.toFixed(1) + "% of the vacation has passed";
-      } else {
-        setState("after");
+    function placePlane(p) {
+      if (!route) return;
+      p = Math.min(1, Math.max(0, p));
+      const L = p * routeLen;
+      const pt = route.getPointAtLength(L);
+      const a = route.getPointAtLength(Math.max(0, L - 1)), b = route.getPointAtLength(Math.min(routeLen, L + 1));
+      let ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
+      if (p >= 1) ang = 180; // parked back home, nose towards the terminal
+      planeG.setAttribute("transform", `translate(${pt.x.toFixed(1)},${pt.y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+      doneEl.style.strokeDasharray = `${L.toFixed(1)} ${routeLen.toFixed(1)}`;
+    }
+
+    // Glide the plane from `from` to the target progress (entrance animation). Skipped with reduced motion.
+    function setFlight(p, big, small, label, from) {
+      flight = { p, big, small, label };
+      writeFlightText();
+      if (from != null && !reduceMotion.matches) {
+        const start = performance.now(), dur = 2600;
+        cancelAnimationFrame(glide);
+        const step = now => {
+          const k = Math.min(1, (now - start) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+          shownP = from + (flight.p - from) * e; placePlane(shownP);
+          glide = k < 1 ? requestAnimationFrame(step) : null;
+        };
+        glide = requestAnimationFrame(step);
+      } else if (!glide) {
+        shownP = p; placePlane(p);
       }
     }
 
-    tick();
-    // Align ticks to whole seconds so the display flips cleanly.
-    setTimeout(function loop() { tick(); setTimeout(loop, 1000 - (now() % 1000) + 5); }, 1000 - (now() % 1000) + 5);
+    /* ---------- Rotating messages ---------- */
+    let messages = CONFIG.messages;
+    let msgIndex = Math.floor(Math.random() * messages.length);
+    const ticker = $("ticker");
+    ticker.textContent = messages[msgIndex];
+    function showMessage(text) {
+      if (reduceMotion.matches) { ticker.textContent = text; return; }
+      ticker.classList.add("out");
+      setTimeout(() => { ticker.textContent = text; ticker.classList.remove("out"); }, 400);
+    }
+    setInterval(() => { msgIndex = (msgIndex + 1) % messages.length; showMessage(messages[msgIndex]); }, 5000);
+
+    /* ---------- State machine: before, wheelsup, during, after ---------- */
+    let state = null;
+    // Returns the previous state when the state changed, or "same".
+    function setState(next) {
+      if (state === next) return "same";
+      const prev = state;
+      state = next;
+      $("countdown").hidden = next === "after";
+      $("contact-card").hidden = next === "after";
+      $("info").classList.toggle("single", next === "after");
+      $("when").hidden = next === "after";
+      const sub = $("subtitle");
+      sub.classList.toggle("wheels", next === "wheelsup");
+      if (next === "after") {
+        $("title-small").textContent = "Welcome back,";
+        $("title-main").textContent = CONFIG.name + "!";
+        sub.textContent = "The tan fades. The ticket queue does not.";
+        $("dest-label").textContent = "Back from";
+        messages = CONFIG.welcomeMessages; msgIndex = 0; ticker.textContent = messages[0];
+      } else {
+        $("title-small").textContent = CONFIG.name + "'s";
+        $("title-main").innerHTML = '<span class="nowrap">Out-of-Office</span> Countdown';
+        $("dest-label").textContent = "Destination";
+        sub.innerHTML =
+          next === "before"   ? "Wheels up in&hellip; plan your questions accordingly." :
+          next === "wheelsup" ? `Wheels up! Next stop: ${D.name}.` :
+                                `<strong>${CONFIG.name} is officially on vacation.</strong> Back in&hellip;`;
+        $("when").innerHTML = next === "during"
+          ? "Back at the desk: " + describeMoment(back)
+          : "Departure: " + describeMoment(depart);
+      }
+      if (next === "wheelsup") {
+        renderCountdown(0);
+        if (planeInner && !reduceMotion.matches) { planeInner.classList.remove("plane-hop"); void planeInner.getBBox(); planeInner.classList.add("plane-hop"); }
+      }
+      // Celebrate at zero: on entering the wheels-up moment, and when the return countdown ends with the page open.
+      if (next === "wheelsup" || (next === "after" && prev !== null)) confetti();
+      return prev;
+    }
+
+    let lastMinute = -1;
+    function tick() {
+      const t = Date.now();
+      let prev;
+      if (t < depart) {
+        prev = setState("before");
+        renderCountdown(depart - t);
+        updateSummary(`${CONFIG.name} leaves in ${spoken(depart - t)}.`);
+        if (prev !== "same") setFlight(0, homeShort.format(depart), `wheels up ${homeClock.format(depart)}`,
+          `${CONFIG.name} is waiting at ${D.homeCity} for the flight to ${D.name}.`);
+      } else if (t < depart + WHEELS_UP_MS) {
+        prev = setState("wheelsup");
+        updateSummary(`Wheels up! ${CONFIG.name} has left for ${D.name}.`);
+        if (prev !== "same") setFlight(0, "Wheels up!", `next stop: ${D.name}`, `Wheels up. ${CONFIG.name} has left for ${D.name}.`);
+      } else if (t < back) {
+        prev = setState("during");
+        renderCountdown(back - t);
+        const p = (t - depart) / (back - depart);
+        const pct = (Math.floor(p * 1000) / 10).toFixed(1) + "%"; // round down so it never shows 100.0% early
+        updateSummary(`${CONFIG.name} is on vacation and back in ${spoken(back - t)}. ${pct} of the vacation has passed.`);
+        setFlight(p, pct, "of the vacation done", `Vacation progress: ${pct} done.`, prev === null ? 0 : undefined);
+      } else {
+        prev = setState("after");
+        updateSummary(`${CONFIG.name} is back from ${D.name}.`);
+        if (prev !== "same") setFlight(1, "Home", "round trip complete", `${CONFIG.name} is back in ${D.homeCity}. Round trip complete.`);
+      }
+      const minute = Math.floor(t / 60000);
+      if (minute !== lastMinute || prev !== "same") { lastMinute = minute; updateBonaire(t, state === "wheelsup" ? "during" : state); }
+    }
 
     /* ---------- Confetti ---------- */
     const canvas = $("confetti");
     const ctx = canvas.getContext("2d");
     let pieces = [], running = false;
-
-    function resize() {
+    function resizeCanvas() {
       canvas.width = innerWidth * devicePixelRatio;
       canvas.height = innerHeight * devicePixelRatio;
       ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
     }
-    addEventListener("resize", resize);
-    resize();
+    resizeCanvas();
 
-    function confetti() {
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    function confetti(x = innerWidth / 2, y = innerHeight * .45, count = 260, spread = 16) {
+      if (reduceMotion.matches) return;
       const colors = ["#ffe08a", "#ff5e8a", "#7be0d6", "#ffffff", "#ff9a5a", "#b28dff"];
-      for (let i = 0; i < 260; i++) {
+      for (let i = 0; i < count; i++) {
         pieces.push({
-          x: innerWidth / 2 + (Math.random() - .5) * 120,
-          y: innerHeight * .45,
-          vx: (Math.random() - .5) * 16,
-          vy: -Math.random() * 16 - 6,
+          x: x + (Math.random() - .5) * 60, y,
+          vx: (Math.random() - .5) * spread, vy: -Math.random() * spread - 5,
           w: 6 + Math.random() * 6, h: 8 + Math.random() * 8,
           r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
           c: colors[i % colors.length], life: 0
@@ -522,14 +736,12 @@
       }
       if (!running) { running = true; requestAnimationFrame(draw); }
     }
-
     function draw() {
       ctx.clearRect(0, 0, innerWidth, innerHeight);
       pieces = pieces.filter(p => p.y < innerHeight + 40 && p.life < 600);
       for (const p of pieces) {
         p.life++; p.vy += .35; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
-        ctx.save();
-        ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
         ctx.fillStyle = p.c;
         ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.life / 8)));
         ctx.restore();
@@ -538,8 +750,25 @@
       else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
     }
 
-    // Easter egg: tap the sun area (title) for a test celebration.
-    document.querySelector("h1").addEventListener("dblclick", confetti);
+    let sunIdx = 0;
+    $("sun").addEventListener("click", () => {
+      const r = $("sun").getBoundingClientRect();
+      confetti(r.left + r.width / 2, Math.min(innerHeight - 20, r.top + r.height * .3), 90, 11);
+      showMessage(CONFIG.sunMessages[sunIdx++ % CONFIG.sunMessages.length]);
+    });
+
+    /* ---------- Start ---------- */
+    buildFlight();
+    tick();
+    setTimeout(function loop() { tick(); setTimeout(loop, 1000 - (Date.now() % 1000) + 5); }, 1000 - (Date.now() % 1000) + 5);
+
+    let resizeTimer;
+    addEventListener("resize", () => {
+      resizeCanvas();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildFlight, 120);
+    });
+    if (document.fonts) document.fonts.ready.then(buildFlight);
   </script>
 </body>
 </html>

@@ -7,20 +7,30 @@ A static countdown page (plain HTML, CSS and JavaScript, no build step).
 Open `index.html` and change the `CONFIG` block near the bottom:
 
 - `departure` / `returnAt`: keep the fixed `+01:00` offset so everyone sees the same moment
-- `destination`, `contactHtml`: public page, so work contact info only
-- `messages` (away) and `welcomeMessages` (after return)
+- `destination`: name, description, time zone and the airport codes on the flight path
+- `contacts`: public page, so work contact info only
+- `messages` (away), `welcomeMessages` (after return) and `sunMessages` (click the sun)
 
-## Preview a state
+## How it behaves
 
-Add `?now=` to the URL to fake the current time (encode `+` as `%2B`):
+- Before departure: countdown to departure, plane waiting at Amsterdam
+- At departure: a 6 second "Wheels up!" moment with confetti
+- During the vacation: countdown to the return, plane on the flight path showing how much of the vacation has passed
+- After return: "Welcome back" with the plane back at Amsterdam
 
-- Before: `index.html?now=2026-12-08T09:59:50%2B01:00` (watch it hit zero, confetti included)
-- During: `index.html?now=2026-12-15T12:00:00%2B01:00`
-- After: `index.html?now=2026-12-28T09:00:00%2B01:00`
+Dates are always shown in British English, 24-hour time and CET, plus the visitor's own time when it differs.
 
-Double-click the title for a test round of confetti.
+## Testing other moments
+
+The page has no test switches. To preview a state, fake the clock from outside, for example with Playwright:
+
+```js
+await page.clock.install({ time: new Date("2026-12-17T23:30:00+01:00") });
+await page.goto("file:///path/to/vacation-countdown/index.html");
+```
 
 ## Share preview
 
-`og-image.png` is the 1200x630 image used by Teams and Slack. The Open Graph tags point to
+`og-image.png` (1200x630) is used by Teams and Slack. The Open Graph tags point to
 `https://rowocloudfactory.github.io/vacation/vacation-countdown/`. Update them if the page is hosted elsewhere.
+Icons: `icon.svg`, `favicon-32.png` and `apple-touch-icon.png`.
