@@ -1,5 +1,7 @@
 # Ronald's Out-of-Office Countdown
 
+Live at https://cf.ronaldwouters.com/vacation-countdown/
+
 A static countdown page (plain HTML, CSS and JavaScript, no build step).
 
 ## Edit the details
@@ -31,6 +33,6 @@ await page.goto("file:///path/to/vacation-countdown/index.html");
 
 ## Share preview
 
-`og-image.png` (1200x630) is used by Teams and Slack. The Open Graph tags point to
-`https://rowocloudfactory.github.io/vacation/vacation-countdown/`. Update them if the page is hosted elsewhere.
+`og-image.png` (1200x630) is used by Teams and Slack. The canonical link and Open Graph tags point to
+`https://cf.ronaldwouters.com/vacation-countdown/`. Update them if the page is hosted elsewhere.
 Icons: `icon.svg`, `favicon-32.png` and `apple-touch-icon.png`.
