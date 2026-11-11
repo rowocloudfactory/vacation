@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ronald's Out-of-Office Countdown</title>
+  <meta name="description" content="Live countdown until Ronald from the Cloud Factory EU Partner Care team swaps tickets for a beach towel.">
+  <meta name="theme-color" content="#ff7e5f">
+
+  <!-- Open Graph / Teams / Slack previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ronald's Out-of-Office Countdown">
+  <meta property="og:description" content="Days, hours, minutes and seconds until Ronald is officially on vacation. Plan your questions accordingly.">
+  <meta property="og:url" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/">
+  <meta property="og:image" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sunset with palm trees and a plane: Ronald's Out-of-Office Countdown">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ronald's Out-of-Office Countdown">
+  <meta name="twitter:description" content="Days, hours, minutes and seconds until Ronald is officially on vacation.">
+  <meta name="twitter:image" content="https://rowocloudfactory.github.io/vacation/vacation-countdown/og-image.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --sky-top: #2b1055;
+      --sky-mid: #d53369;
+      --sky-low: #ff7e5f;
+      --sky-horizon: #feb47b;
+      --sun: #ffd86b;
+      --sea-1: #1f6f8b;
+      --sea-2: #165a72;
+      --sea-3: #0e3f52;
+      --palm: #1b1030;
+      --card-bg: rgba(255, 255, 255, 0.16);
+      --card-border: rgba(255, 255, 255, 0.35);
+      --text: #fffaf3;
+      --text-soft: rgba(255, 250, 243, 0.85);
+      --accent: #ffe08a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: "Fredoka", system-ui, sans-serif;
+      color: var(--text);
+      background: var(--sea-3);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ---------- Scenery ---------- */
+    .scene {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+      background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 38%, var(--sky-low) 62%, var(--sky-horizon) 78%);
+    }
+
+    .stars {
+      position: absolute; inset: 0 0 50% 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 28% 8%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 47% 22%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 81% 6%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 92% 25%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 5% 35%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 72% 30%, #fff 50%, transparent 51%);
+      opacity: .7;
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: .35; } to { opacity: .8; } }
+
+    .sun {
+      position: absolute;
+      left: 50%; bottom: 14vh;
+      width: min(52vw, 340px); aspect-ratio: 1;
+      transform: translate(-50%, 50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fff3c4 0%, var(--sun) 45%, #ff9a5a 100%);
+      box-shadow: 0 0 80px 30px rgba(255, 190, 110, .55);
+      animation: sunGlow 6s ease-in-out infinite alternate;
+    }
+    @keyframes sunGlow {
+      from { box-shadow: 0 0 60px 20px rgba(255, 190, 110, .45); }
+      to   { box-shadow: 0 0 110px 45px rgba(255, 190, 110, .65); }
+    }
+
+    .waves { position: absolute; left: 0; right: 0; bottom: 0; height: 22vh; min-height: 120px; }
+    .wave {
+      position: absolute; left: -50%; width: 200%; height: 100%;
+      background-repeat: repeat-x; background-size: 50% 100%;
+    }
+    .wave.w1 {
+      bottom: 0; opacity: .75;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 40 Q100 10 200 40 T400 40 T600 40 T800 40 V120 H0Z' fill='%231f6f8b'/%3E%3C/svg%3E");
+      animation: drift 14s linear infinite;
+    }
+    .wave.w2 {
+      bottom: -12px; opacity: .85;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 55 Q100 30 200 55 T400 55 T600 55 T800 55 V120 H0Z' fill='%23165a72'/%3E%3C/svg%3E");
+      animation: drift 10s linear infinite reverse;
+    }
+    .wave.w3 {
+      bottom: -26px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120' preserveAspectRatio='none'%3E%3Cpath d='M0 70 Q100 50 200 70 T400 70 T600 70 T800 70 V120 H0Z' fill='%230e3f52'/%3E%3C/svg%3E");
+      animation: drift 7s linear infinite;
+    }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
+
+    .palm { position: absolute; bottom: 4vh; width: clamp(140px, 22vw, 300px); fill: var(--palm); }
+    .palm.left  { left: -30px; transform-origin: bottom center; animation: sway 5s ease-in-out infinite alternate; }
+    .palm.right { right: -40px; transform: scaleX(-1); width: clamp(110px, 17vw, 240px); }
+    .palm.right .fronds { transform-origin: 60% 20%; animation: frond 4s ease-in-out infinite alternate; }
+    @keyframes sway { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
+    @keyframes frond { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+
+    .plane {
+      position: absolute; top: 12vh; left: 0;
+      font-size: clamp(32px, 5vw, 56px);
+      animation: fly 16s linear infinite;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,.25));
+    }
+    .plane .banner {
+      position: absolute; right: 100%; top: 50%; transform: translateY(-50%);
+      margin-right: 6px;
+      font-size: clamp(11px, 1.3vw, 15px); font-weight: 600; white-space: nowrap;
+      background: #fffaf3; color: #d53369;
+      padding: 4px 10px; border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .plane .banner::after {
+      content: ""; position: absolute; left: 100%; top: 50%; width: 8px; border-top: 1.5px solid #fffaf3;
+    }
+    @keyframes fly {
+      0%   { transform: translate(-40vw, 6vh) rotate(-4deg); }
+      50%  { transform: translate(55vw, 0) rotate(2deg); }
+      100% { transform: translate(140vw, -4vh) rotate(-3deg); }
+    }
+
+    /* ---------- Content ---------- */
+    main {
+      position: relative; z-index: 1;
+      max-width: 900px; margin: 0 auto;
+      padding: clamp(80px, 14vh, 140px) 16px 34vh;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: .85rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(255,255,255,.14); border: 1px solid var(--card-border);
+      padding: 6px 14px; border-radius: 999px;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-family: "Pacifico", cursive; font-weight: 400;
+      font-size: clamp(2.1rem, 7vw, 4.4rem);
+      line-height: 1.15;
+      margin: 18px 0 10px;
+      text-shadow: 0 4px 18px rgba(80, 10, 60, .45);
+    }
+
+    .subtitle { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: var(--text-soft); }
+    .subtitle strong { color: var(--accent); font-weight: 600; }
+
+    .countdown {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: clamp(8px, 2vw, 18px);
+      margin: 34px auto 14px; max-width: 720px;
+    }
+    .unit {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 20px; padding: clamp(14px, 3vw, 26px) 6px;
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(60, 10, 50, .25);
+    }
+    .num {
+      display: block;
+      font-size: clamp(2.3rem, 9vw, 4.8rem); font-weight: 700; line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 3px 10px rgba(0,0,0,.2);
+    }
+    .num.tick { animation: pop .35s ease-out; }
+    @keyframes pop { 0% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .label {
+      display: block; margin-top: 8px;
+      font-size: clamp(.7rem, 2vw, .95rem); font-weight: 500;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--text-soft);
+    }
+
+    .target { font-size: .95rem; color: var(--text-soft); }
+
+    .progress-wrap { max-width: 720px; margin: 26px auto 0; text-align: left; }
+    .progress-head { display: flex; justify-content: space-between; font-size: .9rem; color: var(--text-soft); margin-bottom: 8px; gap: 12px; }
+    .progress {
+      height: 22px; border-radius: 999px; overflow: hidden;
+      background: rgba(255,255,255,.18); border: 1px solid var(--card-border);
+    }
+    .bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #ffe08a, #ff9a5a, #ff5e8a);
+      border-radius: 999px;
+      transition: width .8s ease;
+      position: relative;
+    }
+    .bar::after {
+      content: "🏖️"; position: absolute; right: -4px; top: 50%; transform: translateY(-50%); font-size: 18px;
+    }
+    .progress-pct { text-align: center; margin-top: 10px; font-weight: 600; font-size: 1.1rem; }
+
+    .ticker {
+      margin: 30px auto 0; max-width: 560px; min-height: 3.2em;
+      font-size: clamp(1rem, 2.6vw, 1.2rem); font-weight: 500;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .ticker span { transition: opacity .5s ease, transform .5s ease; }
+    .ticker span.out { opacity: 0; transform: translateY(8px); }
+
+    .info {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px; max-width: 720px; margin: 34px auto 0; text-align: left;
+    }
+    .info-card {
+      background: rgba(30, 10, 50, .28); border: 1px solid var(--card-border);
+      border-radius: 18px; padding: 18px 20px;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .info-card h2 { font-size: .8rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .info-card p { font-size: 1.05rem; line-height: 1.45; }
+    .info-card a { color: var(--text); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+    .welcome .big { font-size: clamp(3rem, 12vw, 6rem); margin-bottom: 6px; }
+
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; font-size: .8rem; color: rgba(255,255,255,.75);
+      padding: 0 16px 24px; margin-top: -26vh;
+    }
+
+    [hidden] { display: none !important; }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+
+    @media (max-width: 480px) {
+      .unit { border-radius: 14px; }
+      .label { letter-spacing: .06em; }
+      .plane { top: 7vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .plane { transform: translate(60vw, 0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="sun"></div>
+    <div class="plane"><span class="banner">Bye, Jira!</span>✈️</div>
+
+    <svg class="palm left" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+      <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
+      <g class="fronds">
+        <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
+        <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
+        <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
+        <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
+        <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
+        <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
+        <circle cx="118" cy="124" r="6"/><circle cx="128" cy="126" r="6"/>
+      </g>
+    </svg>
+    <svg class="palm right" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+      <path d="M96 320 C98 250 104 190 118 120 L126 122 C114 190 110 250 112 320 Z"/>
+      <g class="fronds">
+        <path d="M122 118 C90 92 50 92 10 118 C48 96 90 98 122 118Z"/>
+        <path d="M122 118 C100 70 60 52 20 60 C64 62 98 82 122 118Z"/>
+        <path d="M122 118 C130 70 160 44 196 42 C162 58 140 82 122 118Z"/>
+        <path d="M122 118 C160 100 190 110 200 140 C184 118 156 112 122 118Z"/>
+        <path d="M122 118 C126 150 150 176 176 186 C150 168 132 146 122 118Z"/>
+        <path d="M122 118 C96 132 72 160 66 190 C82 160 100 140 122 118Z"/>
+      </g>
+    </svg>
+
+    <div class="waves">
+      <div class="wave w1"></div>
+      <div class="wave w2"></div>
+      <div class="wave w3"></div>
+    </div>
+  </div>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <main>
+    <span class="eyebrow">Cloud Factory · EU Partner Care</span>
+    <h1>Ronald's Out-of-Office Countdown</h1>
+
+    <!-- State 1: before departure -->
+    <section id="state-before" hidden>
+      <p class="subtitle">Wheels up in&hellip; plan your questions accordingly.</p>
+    </section>
+
+    <!-- State 2: on vacation -->
+    <section id="state-during" hidden>
+      <p class="subtitle"><strong>Ronald is officially on vacation.</strong> Back in&hellip;</p>
+    </section>
+
+    <!-- State 3: back -->
+    <section id="state-after" class="welcome" hidden>
+      <div class="big" aria-hidden="true">👋😎</div>
+      <p class="subtitle"><strong>Welcome back, Ronald!</strong><br>The tan fades. The ticket queue does not.</p>
+    </section>
+
+    <div id="countdown-block">
+      <div class="countdown" role="timer" aria-live="off">
+        <div class="unit"><span class="num" id="d">00</span><span class="label">Days</span></div>
+        <div class="unit"><span class="num" id="h">00</span><span class="label">Hours</span></div>
+        <div class="unit"><span class="num" id="m">00</span><span class="label">Minutes</span></div>
+        <div class="unit"><span class="num" id="s">00</span><span class="label">Seconds</span></div>
+      </div>
+      <p class="target" id="target-text"></p>
+    </div>
+
+    <div class="progress-wrap" id="progress-block" hidden>
+      <div class="progress-head"><span>✈️ Departed</span><span>Back at the desk 💻</span></div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Vacation progress">
+        <div class="bar" id="bar"></div>
+      </div>
+      <p class="progress-pct" id="pct"></p>
+    </div>
+
+    <p class="ticker" aria-live="polite"><span id="ticker"></span></p>
+
+    <div class="info">
+      <div class="info-card">
+        <h2>Destination</h2>
+        <p id="destination"></p>
+      </div>
+      <div class="info-card" id="contact-card">
+        <h2>While I'm away, contact</h2>
+        <p id="contact"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>Made with sunscreen and vanilla JavaScript. All times are shown in your local time zone.</footer>
+
+  <script>
+    /* =========================================================
+       CONFIG: edit these values. Keep the fixed +01:00 offset
+       (CET) so everyone sees the same moment, wherever they are.
+       ========================================================= */
+    const CONFIG = {
+      name: "Ronald",
+      departure: "2026-12-08T10:00:00+01:00",
+      returnAt:  "2026-12-27T18:00:00+01:00",
+      destination: "Somewhere sunny, far away from the ticket queue 🌞",
+      contactHtml: 'The <strong>Partner Care team</strong>, who are fully briefed and slightly jealous.',
+      messages: [
+        "Jira tickets will have to wait 🎫",
+        "Out-of-office reply: already written ✍️",
+        "GDAP relationships: on autopilot 🤖",
+        "Teams status: permanently yellow 🟡",
+        "Inbox zero? More like inbox later 📥",
+        "Sunscreen packed. Laptop not. 🧴",
+        "Partner Center can survive without him. Probably. 🤞",
+        "Currently practising the art of not checking email 🧘",
+        "Please hold all NCE questions until further notice ⏸️",
+        "Swapping license counts for coconut counts 🥥"
+      ],
+      welcomeMessages: [
+        "Please be gentle, re-entry is a delicate process 🛬",
+        "Inbox status: legendary 📬",
+        "Still mentally on the beach 🏝️",
+        "Coffee first, tickets second ☕"
+      ]
+    };
+
+    /* ---------- Rotating messages ---------- */
+    let messages = CONFIG.messages;
+    let msgIndex = Math.floor(Math.random() * messages.length);
+    const ticker = document.getElementById("ticker");
+    ticker.textContent = messages[msgIndex];
+    setInterval(() => {
+      ticker.classList.add("out");
+      setTimeout(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        ticker.textContent = messages[msgIndex];
+        ticker.classList.remove("out");
+      }, 500);
+    }, 4500);
+
+    /* ---------- Setup ---------- */
+    const depart = new Date(CONFIG.departure).getTime();
+    const back   = new Date(CONFIG.returnAt).getTime();
+
+    // Testing helper: add ?now=2026-12-15T12:00:00+01:00 to the URL to preview a state.
+    const params = new URLSearchParams(location.search);
+    const fakeStart = params.get("now") ? new Date(params.get("now")).getTime() : null;
+    const realStart = Date.now();
+    const now = () => (fakeStart && !isNaN(fakeStart)) ? fakeStart + (Date.now() - realStart) : Date.now();
+
+    const $ = id => document.getElementById(id);
+    $("destination").textContent = CONFIG.destination;
+    $("contact").innerHTML = CONFIG.contactHtml;
+
+    const fmt = new Intl.DateTimeFormat(undefined, {
+      weekday: "long", day: "numeric", month: "long", year: "numeric",
+      hour: "2-digit", minute: "2-digit", timeZoneName: "short"
+    });
+
+    const pad = n => String(n).padStart(2, "0");
+    const last = { d: null, h: null, m: null, s: null };
+
+    function setNum(id, value) {
+      if (last[id] === value) return;
+      last[id] = value;
+      const el = $(id);
+      el.textContent = value;
+      el.classList.remove("tick");
+      void el.offsetWidth;
+      el.classList.add("tick");
+    }
+
+    function renderCountdown(ms) {
+      const total = Math.max(0, Math.floor(ms / 1000));
+      setNum("d", pad(Math.floor(total / 86400)));
+      setNum("h", pad(Math.floor(total % 86400 / 3600)));
+      setNum("m", pad(Math.floor(total % 3600 / 60)));
+      setNum("s", pad(total % 60));
+    }
+
+    let state = null;
+    function setState(next) {
+      if (state === next) return;
+      const prev = state;
+      state = next;
+      $("state-before").hidden = next !== "before";
+      $("state-during").hidden = next !== "during";
+      $("state-after").hidden  = next !== "after";
+      $("countdown-block").hidden = next === "after";
+      $("progress-block").hidden  = next !== "during";
+      $("contact-card").hidden    = next === "after";
+      if (next === "after") { messages = CONFIG.welcomeMessages; msgIndex = 0; ticker.textContent = messages[0]; }
+      document.querySelector(".banner").textContent =
+        next === "before" ? "Bye, Jira!" : next === "during" ? "Out of office" : "Welcome back!";
+      $("target-text").textContent =
+        next === "before" ? "Departure: " + fmt.format(depart) :
+        next === "during" ? "Return: " + fmt.format(back) : "";
+      // Celebrate when a countdown hits zero while the page is open.
+      if (prev !== null) confetti();
+    }
+
+    function tick() {
+      const t = now();
+      if (t < depart) {
+        setState("before");
+        renderCountdown(depart - t);
+      } else if (t < back) {
+        setState("during");
+        renderCountdown(back - t);
+        const pct = Math.min(100, (t - depart) / (back - depart) * 100);
+        $("bar").style.width = pct + "%";
+        document.querySelector(".progress").setAttribute("aria-valuenow", pct.toFixed(0));
+        $("pct").textContent = pct.toFixed(1) + "% of the vacation has passed";
+      } else {
+        setState("after");
+      }
+    }
+
+    tick();
+    // Align ticks to whole seconds so the display flips cleanly.
+    setTimeout(function loop() { tick(); setTimeout(loop, 1000 - (now() % 1000) + 5); }, 1000 - (now() % 1000) + 5);
+
+    /* ---------- Confetti ---------- */
+    const canvas = $("confetti");
+    const ctx = canvas.getContext("2d");
+    let pieces = [], running = false;
+
+    function resize() {
+      canvas.width = innerWidth * devicePixelRatio;
+      canvas.height = innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    }
+    addEventListener("resize", resize);
+    resize();
+
+    function confetti() {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const colors = ["#ffe08a", "#ff5e8a", "#7be0d6", "#ffffff", "#ff9a5a", "#b28dff"];
+      for (let i = 0; i < 260; i++) {
+        pieces.push({
+          x: innerWidth / 2 + (Math.random() - .5) * 120,
+          y: innerHeight * .45,
+          vx: (Math.random() - .5) * 16,
+          vy: -Math.random() * 16 - 6,
+          w: 6 + Math.random() * 6, h: 8 + Math.random() * 8,
+          r: Math.random() * Math.PI, vr: (Math.random() - .5) * .3,
+          c: colors[i % colors.length], life: 0
+        });
+      }
+      if (!running) { running = true; requestAnimationFrame(draw); }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      pieces = pieces.filter(p => p.y < innerHeight + 40 && p.life < 600);
+      for (const p of pieces) {
+        p.life++; p.vy += .35; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.life / 8)));
+        ctx.restore();
+      }
+      if (pieces.length) requestAnimationFrame(draw);
+      else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
+    }
+
+    // Easter egg: tap the sun area (title) for a test celebration.
+    document.querySelector("h1").addEventListener("dblclick", confetti);
+  </script>
+</body>
+</html>
